@@ -1,26 +1,45 @@
-// src/components/Sidebar.js
-import React from 'react';
+import React, { useState } from 'react';
+import { Drawer, List, ListItem, ListItemText, Button, Typography } from '@mui/material';
 
 const Sidebar = ({ selectCategory, fetchPopularMovies, fetchTopRatedMovies, genres }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <aside className="w-64 h-3/4 bg-gray-800 text-white p-5 mt-5">
-      <h2 className="text-2xl font-bold mb-4">Categorías</h2>
-      <ul>
-        {genres && genres.map((genre) => (
-          <li key={genre.id} className="mb-2 cursor-pointer hover:text-gray-400" onClick={() => selectCategory(genre.id)}>
-            {genre.name}
-          </li>
-        ))}
-      </ul>
-      <h2 className="text-2xl font-bold mt-6 mb-4">Populares</h2>
-      <button className="text-left hover:text-gray-400" onClick={fetchPopularMovies}>
-        Peliculas Populares
-      </button>
-      <h2 className="text-2xl font-bold mt-6 mb-4">Mejor Rankeadas</h2>
-      <button className="text-left hover:text-gray-400" onClick={fetchTopRatedMovies}>
-        Peliculas Mejor Rankeadas
-      </button>
-    </aside>
+    <div>
+      <Button variant="contained" onClick={toggleSidebar}>
+        {isOpen ? 'Close' : 'Open'} Menu
+      </Button>
+      <Drawer anchor="left" open={isOpen} onClose={toggleSidebar}>
+        <div style={{ width: 250 }}>
+          <Typography variant="h6" component="div" style={{ padding: '16px' }}>
+            Categorías
+          </Typography>
+          <List>
+            {genres && genres.map((genre) => (
+              <ListItem button key={genre.id} onClick={() => selectCategory(genre.id)}>
+                <ListItemText primary={genre.name} />
+              </ListItem>
+            ))}
+          </List>
+          <Typography variant="h6" component="div" style={{ padding: '16px' }}>
+            Populares
+          </Typography>
+          <Button fullWidth onClick={fetchPopularMovies}>
+            Peliculas Populares
+          </Button>
+          <Typography variant="h6" component="div" style={{ padding: '16px' }}>
+            Mejor Rankeadas
+          </Typography>
+          <Button fullWidth onClick={fetchTopRatedMovies}>
+            Peliculas Mejor Rankeadas
+          </Button>
+        </div>
+      </Drawer>
+    </div>
   );
 };
 
