@@ -31,6 +31,7 @@ function App() {
   const [playing, setPlaying] = useState(false);
   const [trailer, setTrailer] = useState(null);
   const [showScrollButton, setShowScrollButton] = useState(false);
+  const [searchKey, setSearchKey] = useState('');
 
   const { user, logout } = useContext(UserContext);
 
