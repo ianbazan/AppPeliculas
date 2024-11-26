@@ -20,7 +20,7 @@ const Search = ({ handleSearchSubmit }) => {
       <form onSubmit={handleSubmit} className="search-header" aria-label="Search Form">
         <StyledTextField
           variant="standard"
-          label={searchValue ? "" : "Search"}
+          placeholder="Search"
           value={searchValue}
           onChange={handleSearchChange}
           fullWidth
@@ -30,9 +30,6 @@ const Search = ({ handleSearchSubmit }) => {
                 <SearchIcon style={{ color: 'white' }} />
               </IconButton>
             ),
-          }}
-          InputLabelProps={{
-            style: { color: 'white' },
           }}
         />
       </form>

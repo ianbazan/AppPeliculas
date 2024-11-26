@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import MovieCard from '../components/MovieCard';
 import PopularMovies from '../components/PopularMovies';
 import TopRatedMovies from '../components/TopRatedMovies';
-import Header from '../components/Header';
 import ViewTrailer from '../components/ViewTrailer';
 
 const Home = ({ selectMovie, movies, trailer, playing, setPlaying, movie, IMAGE_PATH, popularMovies, topRatedMovies, fetchPopularMovies, fetchTopRatedMovies, fetchMoviesByGenre, genres }) => {
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [isFirstMovieSelected, setIsFirstMovieSelected] = useState(false); // Nuevo estado para controlar la selección de la primera película
 
   // Referencias Películas Populares y Mejor Rankeadas
   const popularMoviesRef = useRef(null);
@@ -14,7 +14,11 @@ const Home = ({ selectMovie, movies, trailer, playing, setPlaying, movie, IMAGE_
 
   useEffect(() => {
     setFilteredMovies(movies);
-  }, [movies]);
+    if (movies.length > 0 && !isFirstMovieSelected) {
+      selectMovie(movies[0]); // Selecciona automáticamente la primera película
+      setIsFirstMovieSelected(true); // Marca que la primera película ya ha sido seleccionada
+    }
+  }, [movies, selectMovie, isFirstMovieSelected]);
 
   useEffect(() => {
     if (movie) {
@@ -41,6 +45,9 @@ const Home = ({ selectMovie, movies, trailer, playing, setPlaying, movie, IMAGE_
 
       const data = await response.json();
       setFilteredMovies(data.results);
+      if (data.results.length > 0) {
+        selectMovie(data.results[0]); // Selecciona automáticamente la primera película de los resultados
+      }
     } catch (error) {
       console.error("Error fetching movies:", error);
     }
@@ -53,13 +60,6 @@ const Home = ({ selectMovie, movies, trailer, playing, setPlaying, movie, IMAGE_
 
   return (
     <div>
-      <Header
-        handleSearchSubmit={handleSearchSubmit}
-        genres={genres}
-        fetchPopularMovies={fetchPopularMovies}
-        fetchTopRatedMovies={fetchTopRatedMovies}
-        fetchMoviesByGenre={fetchMoviesByCategory}
-      />
       <div>
         <main>
           {movie && (

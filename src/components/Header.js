@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import { IconButton, Button, Drawer, List, ListItem, ListItemText, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import Sidebar from './Sidebar';
 import Search from '../common/Search';
 import styled from 'styled-components';
 
@@ -37,30 +38,14 @@ const Header = ({ handleSearchSubmit, genres, fetchPopularMovies, fetchTopRatedM
         </StyledButton>
       </div>
       <Drawer anchor="left" open={isSidebarOpen} onClose={toggleSidebar}>
-        <div style={{ width: 250 }}>
-          <Typography variant="h6" component="div" style={{ padding: '16px' }}>
-            Categorías
-          </Typography>
-          <List>
-            {genres && genres.map((genre) => (
-              <ListItem button key={genre.id} onClick={() => fetchMoviesByGenre(genre.id)}>
-                <ListItemText primary={genre.name} />
-              </ListItem>
-            ))}
-          </List>
-          <Typography variant="h6" component="div" style={{ padding: '16px' }}>
-            Populares
-          </Typography>
-          <Button fullWidth onClick={fetchPopularMovies}>
-            Peliculas Populares
-          </Button>
-          <Typography variant="h6" component="div" style={{ padding: '16px' }}>
-            Mejor Rankeadas
-          </Typography>
-          <Button fullWidth onClick={fetchTopRatedMovies}>
-            Peliculas Mejor Rankeadas
-          </Button>
-        </div>
+        <Sidebar 
+          isOpen={isSidebarOpen} // Pasa isOpen como prop
+          selectCategory={fetchMoviesByGenre} 
+          fetchPopularMovies={fetchPopularMovies} 
+          fetchTopRatedMovies={fetchTopRatedMovies} 
+          genres={genres} 
+          toggleSidebar={toggleSidebar} // Pasa la función toggleSidebar
+        />
       </Drawer>
     </header>
   );
