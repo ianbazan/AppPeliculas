@@ -14,7 +14,7 @@ const ViewTrailer = ({ movie, trailer, playing, setPlaying, IMAGE_PATH }) => {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         position: 'relative',
-        boxShadow: 'inset 2000px 0 2000px -1200px rgba(0, 0, 0, 0.7), inset 0 -20px 20px -20px rgba(0, 0, 0, 0.7)',
+        boxShadow: 'inset 2000px 0 2000px -900px rgba(0, 0, 0, 0.7), inset 0 -20px 20px -20px rgba(0, 0, 0, 0.7)',
       }}
     >
       {playing ? (
@@ -43,7 +43,7 @@ const ViewTrailer = ({ movie, trailer, playing, setPlaying, IMAGE_PATH }) => {
           </button>
         </>
       ) : (
-        <div className="container mx-auto px-4 py-8" style={{ position: 'absolute', top: '80%', left: '2%', transform: 'translateY(-50%)', textAlign: 'left', maxWidth: '1400px', width: '90%' }}>
+        <div className="container mx-auto px-4 py-8" style={{ position: 'absolute', top: '80%', left: '2%', transform: 'translateY(-50%)', textAlign: 'left', maxWidth: '1000px', width: '90%' }}>
           <div>
             {trailer ? (
               <button

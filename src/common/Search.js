@@ -56,10 +56,10 @@ const StyledTextField = styled(TextField)`
       border-bottom: 1px solid white; // Cambia el color de la barra inferior a blanco
     }
     .MuiInput-underline:hover:not(.Mui-disabled):before {
-      border-bottom: 2px solid white; // Cambia el color de la barra inferior al pasar el mouse a blanco
+      border-bottom: 1px solid white; // Cambia el color de la barra inferior al pasar el mouse a blanco
     }
     .MuiInput-underline:after {
-      border-bottom: 2px solid white; // Cambia el color de la barra inferior activa a blanco
+      border-bottom: 1px solid white; // Cambia el color de la barra inferior activa a blanco
     }
 
     @media (max-width: 1200px) {
