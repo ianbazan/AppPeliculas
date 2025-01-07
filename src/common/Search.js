@@ -20,7 +20,7 @@ const Search = ({ handleSearchSubmit }) => {
       <form onSubmit={handleSubmit} className="search-header" aria-label="Search Form">
         <StyledTextField
           variant="standard"
-          placeholder="Search"
+          placeholder=""
           value={searchValue}
           onChange={handleSearchChange}
           fullWidth
@@ -47,7 +47,8 @@ const StyledWrapper = styled.div`
 
 const StyledTextField = styled(TextField)`
   && {
-    width: 500px; // Ajusta el ancho del input a 500px
+    width: 100%; // Default to 100% width
+    max-width: 500px; // Maximum width of 500px
     .MuiInputBase-root {
       color: white; // Cambia el color del texto a blanco
     }
@@ -59,6 +60,18 @@ const StyledTextField = styled(TextField)`
     }
     .MuiInput-underline:after {
       border-bottom: 2px solid white; // Cambia el color de la barra inferior activa a blanco
+    }
+
+    @media (max-width: 1200px) {
+      max-width: 400px; // Adjust width for laptops
+    }
+
+    @media (max-width: 768px) {
+      max-width: 300px; // Adjust width for tablets
+    }
+
+    @media (max-width: 480px) {
+      max-width: 100%; // Adjust width for mobile devices
     }
   }
 `;

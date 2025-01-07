@@ -43,7 +43,7 @@ const ViewTrailer = ({ movie, trailer, playing, setPlaying, IMAGE_PATH }) => {
           </button>
         </>
       ) : (
-        <div className="container" style={{ position: 'absolute', top: '80%', left: '2%', transform: 'translateY(-50%)', textAlign: 'left', maxWidth: '800px', width: '35%' }}>
+        <div className="container mx-auto px-4 py-8" style={{ position: 'absolute', top: '80%', left: '2%', transform: 'translateY(-50%)', textAlign: 'left', maxWidth: '1400px', width: '90%' }}>
           <div>
             {trailer ? (
               <button
@@ -57,9 +57,9 @@ const ViewTrailer = ({ movie, trailer, playing, setPlaying, IMAGE_PATH }) => {
             ) : (
               "Disculpa, no hay trailer"
             )}
-            <h1 className='text-white text-4xl font-bold'>{movie.title}</h1>
-            <p className='text-white mt-4'>{movie.overview}</p>
-            <p className='text-white mt-2'>Calificación: {movie.vote_average}</p>
+            <h1 className='text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold'>{movie.title}</h1>
+            <p className='text-white mt-4 text-sm sm:text-base md:text-lg lg:text-xl'>{movie.overview}</p>
+            <p className='text-white mt-2 text-sm sm:text-base md:text-lg lg:text-xl'>Calificación: {movie.vote_average}</p>
           </div>
         </div>
       )}

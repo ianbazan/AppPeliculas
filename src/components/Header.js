@@ -22,9 +22,9 @@ const Header = ({ handleSearchSubmit, genres, fetchPopularMovies, fetchTopRatedM
         <IconButton onClick={toggleSidebar} className="text-white">
           <MenuIcon style={{ color: 'white' }} />
         </IconButton>
-        <Link to="/" className="text-white text-2xl ml-2">
+        <StyledLink to="/" className="text-white text-2xl ml-2">
           Pilecola
-        </Link>
+        </StyledLink>
       </div>
       <div className="flex-grow mx-6 flex justify-center">
         <Search handleSearchSubmit={handleSearchSubmit} />
@@ -50,6 +50,18 @@ const Header = ({ handleSearchSubmit, genres, fetchPopularMovies, fetchTopRatedM
     </header>
   );
 };
+
+const StyledLink = styled(Link)`
+  && {
+    display: block; // Ensure the title is displayed by default
+  }
+
+  @media (max-width: 480px) {
+    && {
+      display: none; // Hide the title on small screens
+    }
+  }
+`;
 
 const StyledButton = styled(Button)`
   && {

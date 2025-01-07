@@ -1,15 +1,52 @@
 // src/components/PopularMovies.js
 import React from 'react';
+import Slider from "react-slick"; // Importa el componente Slider de react-slick
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 const PopularMovies = ({ movies, selectMovie, URL_IMAGE }) => {
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-4">Películas Populares</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      <Slider {...sliderSettings}>
         {movies.map((movie) => (
           <div
             key={movie.id}
-            className="relative cursor-pointer"
+            className="relative cursor-pointer px-2"
             onClick={() => selectMovie(movie)}
           >
             <img
@@ -22,7 +59,7 @@ const PopularMovies = ({ movies, selectMovie, URL_IMAGE }) => {
             </div>
           </div>
         ))}
-      </div>
+      </Slider>
     </div>
   );
 };
