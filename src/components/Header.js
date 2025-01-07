@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
-import { IconButton, Button, Drawer, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { IconButton, Button, Drawer, Menu, MenuItem, ListItemIcon, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Sidebar from './Sidebar';
 import Search from '../common/Search';
 import styled from 'styled-components';
@@ -11,9 +12,23 @@ const Header = ({ handleSearchSubmit, genres, fetchPopularMovies, fetchTopRatedM
   const { user, logout } = useContext(UserContext);
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleMenuClick = (path) => {
+    navigate(path);
+    handleMenuClose();
   };
 
   return (
@@ -30,12 +45,33 @@ const Header = ({ handleSearchSubmit, genres, fetchPopularMovies, fetchTopRatedM
         <Search handleSearchSubmit={handleSearchSubmit} />
       </div>
       <div>
-        <StyledButton 
-          variant="text" 
-          onClick={() => navigate('/login')}
+        <IconButton onClick={handleMenuOpen} className="text-white">
+          <AccountCircleIcon style={{ color: 'white' }} />
+        </IconButton>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleMenuClose}
         >
-          Iniciar Sesión
-        </StyledButton>
+          <MenuItem onClick={() => handleMenuClick('/login')}>
+            <ListItemIcon>
+              <AccountCircleIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Iniciar Sesión" />
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuClick('/register')}>
+            <ListItemIcon>
+              <AccountCircleIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Registrarse" />
+          </MenuItem>
+          <MenuItem onClick={() => handleMenuClick('/favorites')}>
+            <ListItemIcon>
+              <AccountCircleIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Favoritos" />
+          </MenuItem>
+        </Menu>
       </div>
       <Drawer anchor="left" open={isSidebarOpen} onClose={toggleSidebar}>
         <Sidebar 
@@ -59,16 +95,6 @@ const StyledLink = styled(Link)`
   @media (max-width: 480px) {
     && {
       display: none; // Hide the title on small screens
-    }
-  }
-`;
-
-const StyledButton = styled(Button)`
-  && {
-    color: white;
-    &:hover {
-      background-color: transparent;
-      text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.7);
     }
   }
 `;

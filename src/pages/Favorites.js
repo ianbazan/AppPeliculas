@@ -6,7 +6,7 @@ const Favorites = ({ selectMovie }) => {
   const { user, favorites, removeFavorite } = useContext(UserContext);
 
   return (
-    <div className='p-5'>
+    <div className='p-20'>
       <h1 className='text-4xl text-center text-white mb-10'>Mis Favoritos</h1>
       <div className='container mx-auto mt-12'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
