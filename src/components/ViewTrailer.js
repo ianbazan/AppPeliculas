@@ -1,34 +1,37 @@
 import React from 'react';
 import YouTube from 'react-youtube';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const ViewTrailer = ({ movie, trailer, playing, setPlaying, IMAGE_PATH }) => {
   return (
     <div
       className="viewtrailer"
       style={{
-        backgroundImage: `url("${IMAGE_PATH}${movie.backdrop_path}")`,
+        backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), url("${IMAGE_PATH}${movie.backdrop_path}")`,
         height: '100vh',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         boxShadow: 'inset 2000px 0 2000px -900px rgba(0, 0, 0, 0.7), inset 0 -20px 20px -20px rgba(0, 0, 0, 0.7)',
       }}
     >
       {playing ? (
         <>
           <YouTube
-            videoId={trailer?.key}  // Asegurando que trailer tenga valor
-            className='reproductor container mx-auto'
+            videoId={trailer?.key}
+            className='reproductor'
             containerClassName={"youtube-container"}
             opts={{
               width: "100%",
               height: "100%",
               playerVars: {
                 autoplay: 1,
-                controls: 0,
+                controls: 1,
                 cc_load_policy: 0,
                 fs: 0,
                 iv_load_policy: 0,
@@ -37,20 +40,20 @@ const ViewTrailer = ({ movie, trailer, playing, setPlaying, IMAGE_PATH }) => {
                 showinfo: 0,
               },
             }}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
           />
-          <button onClick={() => setPlaying(false)} className='boton'>
-            Close
+          <button onClick={() => setPlaying(false)} className='boton close-button absolute left-12' style={{ zIndex: 1000 }}>
+            <FontAwesomeIcon icon={faTimes} size="2x" color="white" />
           </button>
         </>
       ) : (
-        <div className="container mx-auto px-4 py-8" style={{ position: 'absolute', top: '80%', left: '2%', transform: 'translateY(-50%)', textAlign: 'left', maxWidth: '1000px', width: '90%' }}>
+        <div className="container px-4" style={{ position: 'absolute', bottom: '5%', left: '2%', textAlign: 'left', maxWidth: '1000px', width: '90%' }}>
           <div>
             {trailer ? (
               <button
-                className='boton bg-black text-white px-4 py-2 rounded'
+                className='boton play-button'
                 onClick={() => setPlaying(true)}
                 type='button'
-                style={{ backgroundColor: 'transparent', border: 'none' }}
               >
                 <FontAwesomeIcon icon={faPlay} size="2x" color="white" />
               </button> 

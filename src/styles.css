@@ -1,0 +1,39 @@
+.boton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.play-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.close-button {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+  z-index: 1000; /* Ensure the close button is on top of everything */
+}
+
+.close-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.viewtrailer .container {
+  position: absolute;
+  bottom: 20%;
+  left: 2%;
+  text-align: left;
+  max-width: 1000px;
+  width: 90%;
+  z-index: 5; /* Ensure the text is above the background */
+}
